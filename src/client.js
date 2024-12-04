@@ -218,6 +218,7 @@ module.exports = class Client {
    * @prop {boolean} [DEBUG] Enable debug mode
    * @prop {'data' | 'prodata' | 'widgetdata'} [server] Server type
    * @prop {string} [location] Auth page location (For france: https://fr.tradingview.com/)
+   * @prop {object} agent Override default http agent
    */
 
   /** Client object
@@ -229,6 +230,7 @@ module.exports = class Client {
     const server = clientOptions.server || 'data';
     this.#ws = new WebSocket(`wss://${server}.tradingview.com/socket.io/websocket?&type=chart`, {
       origin: 'https://s.tradingview.com',
+      agent: clientOptions.agent,
     });
 
     if (clientOptions.token) {
